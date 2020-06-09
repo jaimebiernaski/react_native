@@ -8,13 +8,13 @@ import IndexScreen from './src/screens/IndexScreen';
 import EditScreen from './src/screens/EditScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import ShowScreen from './src/screens/ShowScreen';
-import { BlogProvider } from './src/context/BlogContext';
+import { Provider } from './src/context/BlogContext';
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <BlogProvider>
+    <Provider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Index'>
           <Stack.Screen
@@ -27,7 +27,7 @@ function App() {
           <Stack.Screen name='Show' component={ShowScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </BlogProvider>
+    </Provider>
   );
 }
 
