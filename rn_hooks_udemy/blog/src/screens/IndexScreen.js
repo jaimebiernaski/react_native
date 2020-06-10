@@ -1,14 +1,35 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import { Context } from '../context/BlogContext';
 import Item from '../components/Item';
+import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 function IndexScreen() {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost } = useContext(Context);
+  const navigation = useNavigation();
 
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.buttom}
+          onPress={() => navigation.navigate('Create')}
+        >
+          <MaterialIcons name='add' style={styles.icon} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+  console.log('state', state);
   return (
     <View style={styles.container}>
-      <Button title='Add Post' onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={(_, index) => `${index}`}
@@ -26,7 +47,16 @@ function IndexScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 7,
     flex: 1,
+  },
+  buttom: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    fontSize: 24,
   },
 });
 

@@ -1,17 +1,30 @@
-import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Context } from '../context/BlogContext';
+import { useNavigation } from '@react-navigation/native';
+import Form from '../components/Form';
 
-function CreateScreen() {
+const CreateScreen = () => {
+  const { addBlogPost } = useContext(Context);
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text>CreateScreen</Text>
+      <Form
+        buttonTitle='Add Post'
+        onSubmit={(post) => {
+          addBlogPost(post);
+          navigation.goBack();
+        }}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 10,
   },
 });
 

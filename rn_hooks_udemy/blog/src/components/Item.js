@@ -1,14 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Item = ({ title, id, deleteItem }) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
-
+      <TouchableOpacity
+        style={styles.textContainer}
+        onPress={() => {
+          navigation.navigate('Show', {
+            postId: id,
+          });
+        }}
+      >
+        <Text style={styles.text}>{title}</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.touch} onPress={() => deleteItem(id)}>
-        <AntDesign name='delete' style={styles.icon} />
+        <MaterialIcons name='delete' style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -23,8 +34,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAFAF1',
     borderWidth: 1,
   },
-  text: {
+  textContainer: {
     flex: 1,
+  },
+  text: {
     fontSize: 16,
     marginLeft: 5,
   },
