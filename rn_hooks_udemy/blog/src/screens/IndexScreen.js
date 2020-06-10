@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,20 @@ import {
 } from 'react-native';
 import { Context } from '../context/BlogContext';
 import Item from '../components/Item';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 function IndexScreen() {
-  const { state, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
   const navigation = useNavigation();
 
-  React.useEffect(() => {
+  useFocusEffect(
+    React.useCallback(() => {
+      getBlogPosts();
+    }, [])
+  );
+
+  useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
@@ -27,6 +33,7 @@ function IndexScreen() {
       ),
     });
   }, [navigation]);
+
   console.log('state', state);
   return (
     <View style={styles.container}>
