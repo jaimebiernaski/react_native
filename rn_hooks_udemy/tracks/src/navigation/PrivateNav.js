@@ -29,18 +29,6 @@ const TrackListAndDetailStack = () => {
   );
 };
 
-const CreateStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name='CreateStack'
-        component={TrackCreateScreen}
-        options={{ title: 'Create' }}
-      />
-    </Stack.Navigator>
-  );
-};
-
 const AccountStack = () => {
   return (
     <Stack.Navigator>
@@ -56,12 +44,12 @@ const AccountStack = () => {
 const PrivateNav = () => {
   return (
     <Tab.Navigator
-      initialRouteName='Track'
+      initialRouteName='Tracks'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Track') iconName = 'map';
+          if (route.name === 'Tracks') iconName = 'map';
           if (route.name === 'Create') iconName = 'map-marker-plus';
           if (route.name === 'Account') iconName = 'account-circle';
 
@@ -75,8 +63,8 @@ const PrivateNav = () => {
         inactiveTintColor: 'gray',
       }}
     >
-      <Tab.Screen name='Track' component={TrackListAndDetailStack} />
-      <Tab.Screen name='Create' component={CreateStack} />
+      <Tab.Screen name='Tracks' component={TrackListAndDetailStack} />
+      <Tab.Screen name='Create' component={TrackCreateScreen} />
       <Tab.Screen name='Account' component={AccountStack} />
     </Tab.Navigator>
   );
