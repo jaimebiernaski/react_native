@@ -28,7 +28,9 @@ const TrackCreateScreen = () => {
 
   return (
     <SafeAreaView>
-      <Text h3> Create a Track</Text>
+      <Text h3 style={styles.title}>
+        Create a Track
+      </Text>
       <Maps />
       {err ? <Text style={styles.error}>{err}</Text> : null}
       <TrackForm />
@@ -37,6 +39,9 @@ const TrackCreateScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    marginVertical: 10,
+  },
   error: {
     fontSize: 15,
     color: 'red',
